@@ -66,66 +66,6 @@
     },
     "tags": {}
   },
-  "${tables_table}": {
-    "resource_type": "dynamodb_table",
-    "hash_key_name": "id",
-    "hash_key_type": "N",
-    "read_capacity": 1,
-    "write_capacity": 1,
-    "global_indexes": [],
-    "autoscaling": [],
-    "tags": {}
-  },
-  "${reservations_table}": {
-    "resource_type": "dynamodb_table",
-    "hash_key_name": "id",
-    "hash_key_type": "S",
-    "read_capacity": 1,
-    "write_capacity": 1,
-    "global_indexes": [],
-    "autoscaling": [],
-    "tags": {}
-  },
-  "api-ui-hoster": {
-    "resource_type": "s3_bucket",
-    "acl": "private",
-    "cors": [],
-    "policy": {
-      "Version": "2012-10-17",
-      "Statement": [
-        {
-          "Sid": "WebSiteHostingGetObject",
-          "Effect": "Allow",
-          "Principal": "*",
-          "Action": [
-            "s3:GetObject"
-          ],
-          "Resource": [
-            "arn:aws:s3:::api-ui-hoster/*"
-          ],
-          "Condition": {
-            "IpAddress": {
-              "aws:SourceIp": [
-                "XXX.XXX.XXX.XXX/32"
-              ]
-            }
-          }
-        }
-      ]
-    },
-    "public_access_block": {
-      "block_public_acls": true,
-      "ignore_public_acls": true,
-      "block_public_policy": true,
-      "restrict_public_buckets": true
-    },
-    "tags": {},
-    "website_hosting": {
-      "enabled": true,
-      "index_document": "index.html",
-      "error_document": "error.html"
-    }
-  },
   "task12_api": {
     "resource_type": "api_gateway",
     "deploy_stage": "api",
@@ -242,5 +182,25 @@
         ]
       }
     }
+  },
+  "${tables_table}": {
+    "resource_type": "dynamodb_table",
+    "hash_key_name": "id",
+    "hash_key_type": "N",
+    "read_capacity": 1,
+    "write_capacity": 1,
+    "global_indexes": [],
+    "autoscaling": [],
+    "tags": {}
+},
+  "${reservations_table}": {
+    "resource_type": "dynamodb_table",
+    "hash_key_name": "id",
+    "hash_key_type": "S",
+    "read_capacity": 1,
+    "write_capacity": 1,
+    "global_indexes": [],
+    "autoscaling": [],
+    "tags": {}
   }
 }
