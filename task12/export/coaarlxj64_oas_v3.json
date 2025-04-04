@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Restaurant Booking API",
+    "title": "task12_api",
     "description": "API for managing restaurant table bookings and reservations",
     "version": "1.0.0"
   },
