@@ -1,8 +1,9 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "task12_api",
-    "version": "2025-04-03T22:48:25Z"
+    "title": "Restaurant Booking API",
+    "description": "API for managing restaurant table bookings and reservations",
+    "version": "1.0.0"
   },
   "servers": [
     {
@@ -15,282 +16,81 @@
     }
   ],
   "paths": {
-    "/reservations": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "200 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Empty"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "authorizer": []
-          }
-        ],
-        "x-amazon-apigateway-integration": {
-          "httpMethod": "POST",
-          "uri": "arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:423623856894:function:api_handler/invocations",
-          "responses": {
-            "default": {
-              "statusCode": "200",
-              "responseParameters": {
-                "method.response.header.Access-Control-Allow-Origin": "'*'"
-              }
-            }
-          },
-          "passthroughBehavior": "when_no_match",
-          "type": "aws_proxy"
-        }
-      },
+    "/signup": {
       "post": {
+        "summary": "Sign up a new user",
+        "description": "Create a new user account in the system",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignupRequest"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": "200 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
+            "description": "User successfully created",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Empty"
+                  "$ref": "#/components/schemas/SignupResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
-        "security": [
-          {
-            "authorizer": []
-          }
-        ],
         "x-amazon-apigateway-integration": {
           "httpMethod": "POST",
           "uri": "arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:423623856894:function:api_handler/invocations",
-          "responses": {
-            "default": {
-              "statusCode": "200",
-              "responseParameters": {
-                "method.response.header.Access-Control-Allow-Origin": "'*'"
-              }
-            }
-          },
           "passthroughBehavior": "when_no_match",
           "type": "aws_proxy"
-        }
-      },
-      "options": {
-        "responses": {
-          "200": {
-            "description": "200 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Access-Control-Allow-Methods": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Access-Control-Allow-Headers": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Empty"
-                }
-              }
-            }
-          }
-        },
-        "x-amazon-apigateway-integration": {
-          "responses": {
-            "default": {
-              "statusCode": "200",
-              "responseParameters": {
-                "method.response.header.Access-Control-Allow-Methods": "'*'",
-                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
-                "method.response.header.Access-Control-Allow-Origin": "'*'"
-              }
-            }
-          },
-          "requestTemplates": {
-            "application/json": "{\"statusCode\": 200}"
-          },
-          "passthroughBehavior": "when_no_match",
-          "type": "mock"
-        }
-      }
-    },
-    "/tables": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "200 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Empty"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "authorizer": []
-          }
-        ],
-        "x-amazon-apigateway-integration": {
-          "httpMethod": "POST",
-          "uri": "arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:423623856894:function:api_handler/invocations",
-          "responses": {
-            "default": {
-              "statusCode": "200",
-              "responseParameters": {
-                "method.response.header.Access-Control-Allow-Origin": "'*'"
-              }
-            }
-          },
-          "passthroughBehavior": "when_no_match",
-          "type": "aws_proxy"
-        }
-      },
-      "post": {
-        "responses": {
-          "200": {
-            "description": "200 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Empty"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "authorizer": []
-          }
-        ],
-        "x-amazon-apigateway-integration": {
-          "httpMethod": "POST",
-          "uri": "arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:423623856894:function:api_handler/invocations",
-          "responses": {
-            "default": {
-              "statusCode": "200",
-              "responseParameters": {
-                "method.response.header.Access-Control-Allow-Origin": "'*'"
-              }
-            }
-          },
-          "passthroughBehavior": "when_no_match",
-          "type": "aws_proxy"
-        }
-      },
-      "options": {
-        "responses": {
-          "200": {
-            "description": "200 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Access-Control-Allow-Methods": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Access-Control-Allow-Headers": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Empty"
-                }
-              }
-            }
-          }
-        },
-        "x-amazon-apigateway-integration": {
-          "responses": {
-            "default": {
-              "statusCode": "200",
-              "responseParameters": {
-                "method.response.header.Access-Control-Allow-Methods": "'*'",
-                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
-                "method.response.header.Access-Control-Allow-Origin": "'*'"
-              }
-            }
-          },
-          "requestTemplates": {
-            "application/json": "{\"statusCode\": 200}"
-          },
-          "passthroughBehavior": "when_no_match",
-          "type": "mock"
         }
       }
     },
     "/signin": {
       "post": {
+        "summary": "Sign in a user",
+        "description": "Authenticate a user and return a token",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SigninRequest"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": "200 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
+            "description": "Successfully authenticated",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Empty"
+                  "$ref": "#/components/schemas/SigninResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -299,119 +99,116 @@
         "x-amazon-apigateway-integration": {
           "httpMethod": "POST",
           "uri": "arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:423623856894:function:api_handler/invocations",
-          "responses": {
-            "default": {
-              "statusCode": "200",
-              "responseParameters": {
-                "method.response.header.Access-Control-Allow-Origin": "'*'"
-              }
-            }
-          },
           "passthroughBehavior": "when_no_match",
           "type": "aws_proxy"
         }
-      },
-      "options": {
-        "responses": {
-          "200": {
-            "description": "200 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Access-Control-Allow-Methods": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Access-Control-Allow-Headers": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Empty"
-                }
-              }
-            }
-          }
-        },
-        "x-amazon-apigateway-integration": {
-          "responses": {
-            "default": {
-              "statusCode": "200",
-              "responseParameters": {
-                "method.response.header.Access-Control-Allow-Methods": "'*'",
-                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
-                "method.response.header.Access-Control-Allow-Origin": "'*'"
-              }
-            }
-          },
-          "requestTemplates": {
-            "application/json": "{\"statusCode\": 200}"
-          },
-          "passthroughBehavior": "when_no_match",
-          "type": "mock"
-        }
       }
     },
-    "/tables/{tableId}": {
+    "/tables": {
       "get": {
-        "parameters": [
-          {
-            "name": "tableId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "200 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Empty"
-                }
-              }
-            }
-          }
-        },
+        "summary": "List all tables",
+        "description": "Retrieve a list of all tables in the restaurant",
         "security": [
           {
             "authorizer": []
           }
         ],
-        "x-amazon-apigateway-integration": {
-          "httpMethod": "POST",
-          "uri": "arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:423623856894:function:api_handler/invocations",
-          "responses": {
-            "default": {
-              "statusCode": "200",
-              "responseParameters": {
-                "method.response.header.Access-Control-Allow-Origin": "'*'"
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TablesResponse"
+                }
               }
             }
           },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:423623856894:function:api_handler/invocations",
           "passthroughBehavior": "when_no_match",
           "type": "aws_proxy"
         }
       },
-      "options": {
+      "post": {
+        "summary": "Create a new table",
+        "description": "Add a new table to the restaurant",
+        "security": [
+          {
+            "authorizer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TableRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Table created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TableResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:423623856894:function:api_handler/invocations",
+          "passthroughBehavior": "when_no_match",
+          "type": "aws_proxy"
+        }
+      }
+    },
+    "/tables/{tableId}": {
+      "get": {
+        "summary": "Get a specific table",
+        "description": "Retrieve details of a specific table",
+        "security": [
+          {
+            "authorizer": []
+          }
+        ],
         "parameters": [
           {
             "name": "tableId",
@@ -419,73 +216,37 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "description": "The ID of the table to retrieve"
           }
         ],
         "responses": {
           "200": {
-            "description": "200 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Access-Control-Allow-Methods": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Access-Control-Allow-Headers": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
+            "description": "Successful response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Empty"
+                  "$ref": "#/components/schemas/TableResponse"
                 }
               }
             }
-          }
-        },
-        "x-amazon-apigateway-integration": {
-          "responses": {
-            "default": {
-              "statusCode": "200",
-              "responseParameters": {
-                "method.response.header.Access-Control-Allow-Methods": "'*'",
-                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
-                "method.response.header.Access-Control-Allow-Origin": "'*'"
-              }
-            }
           },
-          "requestTemplates": {
-            "application/json": "{\"statusCode\": 200}"
-          },
-          "passthroughBehavior": "when_no_match",
-          "type": "mock"
-        }
-      }
-    },
-    "/signup": {
-      "post": {
-        "responses": {
-          "200": {
-            "description": "200 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
+          "404": {
+            "description": "Table not found",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Empty"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -494,87 +255,283 @@
         "x-amazon-apigateway-integration": {
           "httpMethod": "POST",
           "uri": "arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:423623856894:function:api_handler/invocations",
-          "responses": {
-            "default": {
-              "statusCode": "200",
-              "responseParameters": {
-                "method.response.header.Access-Control-Allow-Origin": "'*'"
-              }
-            }
-          },
           "passthroughBehavior": "when_no_match",
           "type": "aws_proxy"
         }
-      },
-      "options": {
+      }
+    },
+    "/reservations": {
+      "get": {
+        "summary": "List all reservations",
+        "description": "Retrieve a list of all reservations",
+        "security": [
+          {
+            "authorizer": []
+          }
+        ],
         "responses": {
           "200": {
-            "description": "200 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Access-Control-Allow-Methods": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Access-Control-Allow-Headers": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
+            "description": "Successful response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Empty"
+                  "$ref": "#/components/schemas/ReservationsResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "x-amazon-apigateway-integration": {
-          "responses": {
-            "default": {
-              "statusCode": "200",
-              "responseParameters": {
-                "method.response.header.Access-Control-Allow-Methods": "'*'",
-                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
-                "method.response.header.Access-Control-Allow-Origin": "'*'"
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:423623856894:function:api_handler/invocations",
+          "passthroughBehavior": "when_no_match",
+          "type": "aws_proxy"
+        }
+      },
+      "post": {
+        "summary": "Create a new reservation",
+        "description": "Make a new reservation for a table",
+        "security": [
+          {
+            "authorizer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReservationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Reservation created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationResponse"
+                }
               }
             }
           },
-          "requestTemplates": {
-            "application/json": "{\"statusCode\": 200}"
+          "400": {
+            "description": "Invalid input or conflicting reservation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:423623856894:function:api_handler/invocations",
           "passthroughBehavior": "when_no_match",
-          "type": "mock"
+          "type": "aws_proxy"
         }
       }
     }
   },
   "components": {
     "schemas": {
+      "SignupRequest": {
+        "type": "object",
+        "required": ["firstName", "lastName", "email", "password"],
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "format": "password"
+          }
+        }
+      },
+      "SignupResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "SigninRequest": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "format": "password"
+          }
+        }
+      },
+      "SigninResponse": {
+        "type": "object",
+        "properties": {
+          "idToken": {
+            "type": "string"
+          }
+        }
+      },
+      "TableRequest": {
+        "type": "object",
+        "required": ["number", "places"],
+        "properties": {
+          "number": {
+            "type": "integer"
+          },
+          "places": {
+            "type": "integer"
+          },
+          "isVip": {
+            "type": "boolean"
+          },
+          "minOrder": {
+            "type": "number"
+          }
+        }
+      },
+      "TableResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "number": {
+            "type": "integer"
+          },
+          "places": {
+            "type": "integer"
+          },
+          "isVip": {
+            "type": "boolean"
+          },
+          "minOrder": {
+            "type": "number"
+          }
+        }
+      },
+      "TablesResponse": {
+        "type": "object",
+        "properties": {
+          "tables": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TableResponse"
+            }
+          }
+        }
+      },
+      "ReservationRequest": {
+        "type": "object",
+        "required": ["tableNumber", "clientName", "phoneNumber", "date", "slotTimeStart", "slotTimeEnd"],
+        "properties": {
+          "tableNumber": {
+            "type": "integer"
+          },
+          "clientName": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "slotTimeStart": {
+            "type": "string",
+            "format": "time"
+          },
+          "slotTimeEnd": {
+            "type": "string",
+            "format": "time"
+          }
+        }
+      },
+      "ReservationResponse": {
+        "type": "object",
+        "properties": {
+          "reservationId": {
+            "type": "string"
+          },
+          "tableNumber": {
+            "type": "integer"
+          }
+        }
+      },
+      "ReservationsResponse": {
+        "type": "object",
+        "properties": {
+          "reservations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReservationResponse"
+            }
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
       "Empty": {
         "title": "Empty Schema",
         "type": "object"
       }
     },
-    "securitySchemes": {  
-	"authorizer": {  
-	"type": "apiKey",  
-	"name": "Authorization",  
-	"in": "header",  
-	"x-amazon-apigateway-authtype": "cognito_user_pools",  
-	"x-amazon-apigateway-authorizer": {  
-        "x-syndicate-cognito-userpool-names": ["${booking_userpool}"],
-	"type": "cognito_user_pools"  
-    }  
-  }  
-}
+    "securitySchemes": {
+      "authorizer": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header",
+        "x-amazon-apigateway-authtype": "cognito_user_pools",
+        "x-amazon-apigateway-authorizer": {
+          "x-syndicate-cognito-userpool-names": ["${booking_userpool}"],
+          "type": "cognito_user_pools"
+        }
+      }
+    }
   },
   "x-syndicate-openapi-tags": {
     "run_id": "JAP-12",
